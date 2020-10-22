@@ -24,7 +24,7 @@ include ('../config/function.php');
 <body>
     <?php
     $no_meter = $_GET['no_meter'];
-    $query = mysqli_query($con,"SELECT pelanggan.*,tagihan.jml_bayar,tagihan.tgl_bayar as tgl_sudah_bayar,MONTH(tagihan.tgl_bayar) as bulan FROM pelanggan JOIN tagihan ON pelanggan.id_pelanggan=tagihan.id_pelanggan WHERE MONTH(tagihan.tgl_bayar)=MONTH(pelanggan.tgl_bayar)-1 AND pelanggan.no_meter='$no_meter'")or die(mysqli_error($con));
+    $query = mysqli_query($con,"SELECT pelanggan.*,tagihan.jml_bayar,tagihan.tgl_bayar as tgl_sudah_bayar,MONTH(pelanggan.tgl_bayar) as bulan FROM pelanggan JOIN tagihan ON pelanggan.id_pelanggan=tagihan.id_pelanggan WHERE MONTH(tagihan.tgl_bayar)=MONTH(pelanggan.tgl_bayar)-1 AND pelanggan.no_meter='$no_meter'")or die(mysqli_error($con));
     $row = mysqli_fetch_array($query)
     ?>
     <div style="page-break-after:always;">
