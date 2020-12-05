@@ -42,16 +42,19 @@
         <?php 
         if(isset($_GET['keyword'])):
             $key = $_GET['keyword'];
-            $query = mysqli_query($con,"SELECT id_pelanggan,nama,no_hp,alamat,no_meter,daya,tgl_bayar,MONTH(tgl_bayar) as bln FROM pelanggan WHERE no_meter LIKE '%$key%'")or die(mysqli_error($con));
+            $query = mysqli_query($con,"SELECT pelanggan.*,tagihan.jml_bayar,tagihan.tgl_bayar as tgl_sudah_bayar, MONTH(pelanggan.tgl_bayar) as bln, MONTH(tagihan.tgl_bayar) as bln_bayar FROM pelanggan JOIN tagihan ON pelanggan.id_pelanggan=tagihan.id_pelanggan WHERE no_meter LIKE '%$key%' ORDER BY tagihan.tgl_bayar DESC") or die(mysqli_error($con));
             $row = mysqli_fetch_array($query);
         ?>
         <div class="col-md-12">
-            <?php if(isset($_GET['cetak'])): ?>
+            <?php if(isset($_GET['cetak'])): 
+                    // $key = $_GET['keyword'];
+                    // $query2 = mysqli_query($con,"SELECT pelanggan.*,tagihan.tgl_bayar as tgl_sudah_bayar, MONTH(tagihan.tgl_bayar) as bln_bayar FROM pelanggan JOIN tagihan ON pelanggan.id_pelanggan=tagihan.id_pelanggan WHERE no_meter LIKE '%$key%' ORDER BY tagihan.tgl_bayar DESC") or die(mysqli_error($con));
+                    // $row2 = mysqli_fetch_array($query2);?>
             <div class="card border-left-primary shadow mb-4">
                 <div class="card-body">
                     <h4>Berhasil</h4>
-                    <h5>Pembayaran untuk <b><?= bulan($row['bln']); ?></b> telah berhasil dilakukan. Silah klik tombol
-                        <b>Cetak Bukti</b> untuk mencetak bukti pembayaran.
+                    <h5>Pembayaran untuk <b><?= bulan($row['bln_bayar']); ?></b> telah berhasil dilakukan. Silah
+                        klik tombol <b>Cetak Bukti</b> untuk mencetak bukti pembayaran.
                     </h5>
                     <br>
                     <a href="<?=$base_url;?>process/cetak.php?no_meter=<?=$_GET['keyword'];?>" target="_blank"
@@ -99,7 +102,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Harus Bayar</label>
-                                    <input type="text" class="form-control" value="<?= $row['tgl_bayar']; ?>" readonly>
+                                    <input type="text" class="form-control" name="tgl_harus_bayar"
+                                        value="<?= $row['tgl_bayar']; ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>Jumlah Bayar</label>
