@@ -81,6 +81,7 @@
                             <th width="20">NO</th>
                             <th>NAMA LENGKAP</th>
                             <th>NO METER</th>
+                            <th>TGL BAYAR</th>
                             <th>JUMLAH BAYAR</th>
                         </tr>
                     </thead>
@@ -96,6 +97,7 @@
                             <td><?= $n++; ?></td>
                             <td><?= $row['nama']; ?></td>
                             <td><?= $row['no_meter']; ?></td>
+                            <td><?= $row['tgl_bayar']; ?></td>
                             <td><?= 'Rp. '.number_format($row['jml_bayar'],0,"","."); ?></td>
                         </tr>
                         <?php endwhile; ?>
