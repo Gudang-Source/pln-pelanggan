@@ -8,9 +8,9 @@ if(isset($_POST['bayar'])){
     $no_meter = $_POST['no_meter'];
     $jml_bayar = delMask($_POST['jml_bayar']);
     // $tgl_bayar = date('Y-m-d');
-    $tgl_bayar = $_POST['tgl_harus_bayar'];
+    $tgl_bayar = $_POST['tgl_bayar'];
     // $tgl_bayar_berikut = date('Y-m-d',time()+60*60*24*30);
-    $tgl_bayar_berikut = date('Y-m-d',strtotime($_POST['tgl_harus_bayar'])+60*60*24*30);
+    $tgl_bayar_berikut = date('Y-m-d',strtotime($tgl_bayar)+60*60*24*30);
     
     $insert = mysqli_query($con,"INSERT INTO tagihan (id_pelanggan, jml_bayar, tgl_bayar) VALUES ('$id','$jml_bayar','$tgl_bayar')") or die (mysqli_error($con));
     if($insert){

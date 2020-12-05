@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Harus Bayar</label>
-                                    <input type="text" class="form-control" name="tgl_harus_bayar"
+                                    <input type="text" class="form-control" name="tgl_bayar"
                                         value="<?= $row['tgl_bayar']; ?>" readonly>
                                 </div>
                                 <div class="form-group">

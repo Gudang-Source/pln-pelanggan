@@ -16,7 +16,7 @@
     <li class="nav-item <?=isset($home)?'active':'';?>">
         <a class="nav-link" href="?#">
             <i class="fas fa-fw fa-home"></i>
-            <span>Beranda</span></a>
+            <span>Pembayaran</span></a>
     </li>
 
     <!-- Divider -->
